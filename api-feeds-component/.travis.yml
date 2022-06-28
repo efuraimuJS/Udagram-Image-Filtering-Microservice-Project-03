@@ -1,0 +1,25 @@
+language: node_js
+node_js:
+  - 13
+services:
+  - docker
+
+# Pre-testing installs
+install: 
+  - echo "nothing need to be installed"
+
+# Scripts to be run such as tests
+
+before_install: 
+  - echo "no tests"
+
+script: 
+  - docker --version
+  - docker build -t api-users-component .
+  - docker tag api-users-component efuraimujs/api-feeds-component:latest
+
+# Tasks to perform after the process is successful. Formatting the Docker username and password as below enables you to programmatically log in without having the password exposed in logs.
+
+after_success:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker push efuraimujs/api-feeds-component
