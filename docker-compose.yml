@@ -1,7 +1,7 @@
 version: "3"
 services:
   backend_user:
-    image: api-users-component:v1
+    image: efuraimujs/api-users-component:v1
     environment:
       POSTGRES_USERNAME: $POSTGRES_USERNAME
       POSTGRES_PASSWORD: $POSTGRES_PASSWORD 
@@ -16,7 +16,7 @@ services:
     #   - example-net
 
   backend_feed:
-    image: api-feeds-component:v1
+    image: efuraimujs/api-feeds-component:v1
     volumes:
       - $HOME/.aws:/root/.aws
     environment:

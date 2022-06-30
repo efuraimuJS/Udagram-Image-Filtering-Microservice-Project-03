@@ -1,0 +1,25 @@
+language: node_js
+
+node_js:
+  - 13
+
+services:
+  - docker
+
+install: 
+  - echo "nothing needs to be installed"
+
+before_script: 
+  - echo "no tests"
+
+script: 
+  # Print the docker version for logging
+  - docker --version
+  - docker-compose -f docker-compose-build.yml build
+
+# Tasks to perform after the process is successful. Formatting the
+# Docker username and password as below enables you to programmatically
+# log in without having the password exposed in logs.
+after_success:
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - docker-compose -f docker-compose-build.yml push
