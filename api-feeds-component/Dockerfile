@@ -9,7 +9,7 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # Install dependencies in Docker
-RUN npm Install --force
+RUN npm ci
 
 # Copy app from local env into the created Docker Image
 COPY . .
@@ -18,4 +18,6 @@ COPY . .
 EXPOSE 8080
 
 #Define Docker's behavior when the image is run
-CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "prod", "|", "tee", "errorlog.txt"]
+
+# RUN node ./www/server.js
