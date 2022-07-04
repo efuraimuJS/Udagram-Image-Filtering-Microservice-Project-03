@@ -6,14 +6,15 @@ metadata:
     kompose.version: 1.26.1 (a9d05d509)
   creationTimestamp: null
   labels:
-    io.kompose.service: frontend
-  name: frontend
+    io.kompose.service: reverseproxy
+  name: reverseproxy
 spec:
+  type: LoadBalancer
   ports:
-    - name: "8100"
-      port: 8100
-      targetPort: 80
+    - name: "8080"
+      port: 8080
+      targetPort: 8080
   selector:
-    io.kompose.service: frontend
+    io.kompose.service: reverseproxy
 status:
   loadBalancer: {}

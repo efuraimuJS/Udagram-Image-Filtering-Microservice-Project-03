@@ -1,0 +1,93 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose -f docker-compose.yml -f docker-compose-build.yml convert
+    kompose.version: 1.26.1 (a9d05d509)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: backend-feed
+  name: backend-feed
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      io.kompose.service: backend-feed
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose -f docker-compose.yml -f docker-compose-build.yml convert
+        kompose.version: 1.26.1 (a9d05d509)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: backend-feed
+    spec:
+      containers:
+      - image: efuraimujs/api-feeds-component:v1
+          name: backend-feed
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "1024Mi"
+              cpu: "500m"
+          ports:
+          - containerPort: 8080                
+          env:
+          - name: URL
+            valueFrom:
+              configMapKeyRef:
+                name: env-config
+                key: URL
+          - name: AWS_BUCKET
+            valueFrom:
+              configMapKeyRef:
+                name: env-config
+                key: AWS_BUCKET
+          - name: AWS_PROFILE
+            valueFrom:
+              configMapKeyRef:
+                name: env-config
+                key: AWS_PROFILE
+          - name: AWS_REGION
+            valueFrom:
+              configMapKeyRef:
+                name: env-config
+                key: AWS_REGION
+          - name: JWT_SECRET
+            valueFrom:
+              configMapKeyRef:
+                name: env-config
+                key: JWT_SECRET
+          - name: POSTGRESS_DB
+            valueFrom:
+              configMapKeyRef:
+                name: env-config
+                key: POSTGRESS_DB
+          - name: POSTGRESS_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: env-config
+                key: POSTGRESS_HOST
+          - name: POSTGRESS_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: env-secret
+                key: POSTGRESS_PASSWORD
+          - name: POSTGRESS_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: env-secret
+                key: POSTGRESS_USERNAME      
+          volumeMounts:
+          - name: aws-secret
+            mountPath: "/root/.aws/"
+            readOnly: true
+      restartPolicy: Always
+      volumes:
+      - name: aws-secret
+        secret:
+          secretName: aws-secret       
+status: {}
