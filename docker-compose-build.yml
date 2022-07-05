@@ -1,11 +1,11 @@
 version: "3"
 services:
   
-  backend-user:
+  backend_user:
     build:
       context: ./api-users-component
     image: efuraimujs/api-users-component:v1
-  backend-feed:
+  backend_feed:
     build:
       context: ./api-feeds-component
     image: efuraimujs/api-feeds-component:v1
