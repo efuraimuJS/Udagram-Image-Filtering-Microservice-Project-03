@@ -6,6 +6,10 @@ username=project3root
 create_cluster:
 	eksctl create cluster --name $(my-cluster) --region=$(cluster-region) --nodes-min=2 --nodes-max=3 --asg-access
 
+delete_cluster:
+		eksctl delete cluster --name $(my-cluster) --region=$(cluster-region)
+
+
 set_context:
 	eksctl utils write-kubeconfig --cluster=$(my-cluster) --set-kubeconfig-context=true
 
