@@ -1,6 +1,6 @@
 version: "3"
 services:
-  backend_user:
+  backend-user:
     image: efuraimujs/api-users-component:v1
     environment:
       POSTGRES_USERNAME: $POSTGRES_USERNAME
@@ -15,7 +15,7 @@ services:
     # networks:
     #   - example-net
 
-  backend_feed:
+  backend-feed:
     image: efuraimujs/api-feeds-component:v1
     volumes:
       - $HOME/.aws:/root/.aws
@@ -38,8 +38,8 @@ services:
       - 8080:8080
     restart: always
     depends_on:
-      - backend_user
-      - backend_feed
+      - backend-user
+      - backend-feed
     # networks:
     #   - example-net
           
