@@ -25,8 +25,8 @@ spec:
     spec:
       containers:
       - image: efuraimujs/api-users-component:v1
-          name: backend-user
-          resources:
+        name: backend-user
+        resources:
             resources:
             requests:
               memory: "64Mi"
@@ -34,9 +34,9 @@ spec:
             limits:
               memory: "1024Mi"
               cpu: "500m"      
-          ports:
+        ports:
           - containerPort: 8080            
-          env:
+        env:
           - name: URL
             valueFrom:
               configMapKeyRef:
@@ -82,9 +82,4 @@ spec:
               secretKeyRef:
                 name: env-secret
                 key: POSTGRESS_USERNAME      
-          volumeMounts:
-          - name: aws-secret
-            mountPath: "/root/.aws/"
-            readOnly: true
-      restartPolicy: Always
 status: {}

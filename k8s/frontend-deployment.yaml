@@ -26,10 +26,10 @@ spec:
     spec:
       containers:
       - image: efuraimujs/frontend-component:v1
-          name: frontend
-          ports:
+        name: frontend
+        ports:
             - containerPort: 80
-          resources:
+        resources:
             requests:
               memory: "64Mi"
               cpu: "250m"

@@ -24,18 +24,19 @@ spec:
         io.kompose.service: backend-feed
     spec:
       containers:
-      - image: efuraimujs/api-feeds-component:v1
-          name: backend-feed
-          resources:
-            requests:
-              memory: "64Mi"
-              cpu: "250m"
-            limits:
-              memory: "1024Mi"
-              cpu: "500m"
-          ports:
+      - name: backend-feed
+        image: efuraimujs/api-feeds-component:v1
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "1024Mi"
+            cpu: "500m"
+        ports:
           - containerPort: 8080                
-          env:
+        env:
           - name: URL
             valueFrom:
               configMapKeyRef:
@@ -81,7 +82,7 @@ spec:
               secretKeyRef:
                 name: env-secret
                 key: POSTGRESS_USERNAME      
-          volumeMounts:
+        volumeMounts:
           - name: aws-secret
             mountPath: "/root/.aws/"
             readOnly: true

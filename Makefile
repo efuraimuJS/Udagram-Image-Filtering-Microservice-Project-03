@@ -11,7 +11,7 @@ set_context:
 
 create_iamidentitymapping:
 	eksctl create iamidentitymapping \
-	--username $(username)
+	--username $(username) \
     --cluster $(my-cluster) \
     --region=$(cluster-region) \
     --arn $(arn) \
@@ -19,8 +19,10 @@ create_iamidentitymapping:
     --no-duplicate-arns
 
 update_kubeconfig:
-	aws eks update-kubeconfig --name $(my-cluster)
+	aws eks --region=$(cluster-region) update-kubeconfig --name $(my-cluster)
 
+edit_aws-auth:
+	kubectl edit configmap aws-auth -n kube-system
 
 describe_aws-auth:
 	kubectl describe -n kube-system configmap/aws-auth
@@ -28,4 +30,6 @@ describe_aws-auth:
 describe_stacks:
 	eksctl utils describe-stacks --region=us-east-1 --cluster=$(my-cluster)
 
+deploy_all:
+	kubectl apply -f 
 
