@@ -9,7 +9,7 @@ metadata:
     io.kompose.service: backend-feed
   name: backend-feed
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       io.kompose.service: backend-feed
