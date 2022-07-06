@@ -21,11 +21,11 @@ spec:
         kompose.version: 1.26.1 (a9d05d509)
       creationTimestamp: null
       labels:
-        io.kompose.service: backend-user
+        io.kompose.service: backenduser
     spec:
       containers:
-      - image: efuraimujs/api-users-component:v1
-        name: backend-user
+      - image: efuraimujs/api-users-component:v2
+        name: backenduser
         resources:
             resources:
             requests:

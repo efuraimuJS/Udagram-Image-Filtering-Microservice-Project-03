@@ -1,5 +1,11 @@
 make --dry-run --always-make --keep-going --print-directory
 make: Entering directory '/home/efuraimujs/Udagram-Image-Filtering-Microservice-Project-03'
-eksctl create cluster --name udagram-project-03-cluster --region=us-east-1 --nodes-min=2 --nodes-max=3 --asg-access
+eksctl create cluster --name udagram-project-03-cluster \
+--nodegroup-name linux-workers \
+--region=us-east-1 \
+--nodes-min=2 \
+--nodes-max=3 \
+--asg-access \
+--node-ami-family=AmazonLinux2
 make: Leaving directory '/home/efuraimujs/Udagram-Image-Filtering-Microservice-Project-03'
  

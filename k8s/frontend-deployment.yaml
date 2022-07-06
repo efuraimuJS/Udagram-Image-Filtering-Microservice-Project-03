@@ -25,7 +25,7 @@ spec:
         io.kompose.service: frontend
     spec:
       containers:
-      - image: efuraimujs/frontend-component:v1
+      - image: efuraimujs/frontend-component:v2
         name: frontend
         ports:
             - containerPort: 80
