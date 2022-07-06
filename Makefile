@@ -67,6 +67,20 @@ deploys:
 	kubectl get deployments
 svc:
 	kubectl get services
+hpa:
+	kubectl autoscale deployment backendfeed backenduser frontend reverseproxy --cpu-percent=50 \
+    --min=1 \
+    --max=10
+gethpa:
+	kubectl get hpa -w
+metricsvc:
+	kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+testhpa:
+	kubectl run -i --tty load-generator --rm \
+	--image=busybox \
+	--restart=Never \
+	-- /bin/sh -c "while sleep 0.01; do wget -q -O- \
+	http://a17483251f65c4fc9bb69e1aa74c370b-810897999.us-east-1.elb.amazonaws.com:8080/api/v0/feed; done"
 
 compose_down:
 	sudo aa-remove-unknown
