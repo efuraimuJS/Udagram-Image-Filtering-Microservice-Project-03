@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: backenduser
-        image: efuraimujs/api-users-component:v2
+        image: efuraimujs/api-users-component:v3
         imagePullPolicy: "Always"
         resources:
           requests:

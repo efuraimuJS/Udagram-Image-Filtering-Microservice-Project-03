@@ -4,18 +4,18 @@ services:
   backenduser:
     build:
       context: ./api-users-component
-    image: efuraimujs/api-users-component:v2
+    image: efuraimujs/api-users-component:v3
   backendfeed:
     build:
       context: ./api-feeds-component
-    image: efuraimujs/api-feeds-component:v2
+    image: efuraimujs/api-feeds-component:v3
 
   reverseproxy:
     build:
       context: ./api-gateway-component
-    image: efuraimujs/api-gateway-component:v2
+    image: efuraimujs/api-gateway-component:v3
     
   frontend:
     build:
       context: ./frontend-component
-    image: efuraimujs/frontend-component:v2
+    image: efuraimujs/frontend-component:v3

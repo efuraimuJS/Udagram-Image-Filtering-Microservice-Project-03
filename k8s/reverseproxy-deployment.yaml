@@ -16,7 +16,7 @@ spec:
         service: reverseproxy
     spec:
       containers:
-      - image: efuraimujs/api-gateway-component:v2
+      - image: efuraimujs/api-gateway-component:v3
         name: reverseproxy
         imagePullPolicy: Always          
         resources:

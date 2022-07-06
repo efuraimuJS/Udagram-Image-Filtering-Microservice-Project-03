@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: backendfeed
-        image: efuraimujs/api-feeds-component:v2
+        image: efuraimujs/api-feeds-component:v3
         imagePullPolicy: "Always"
         resources:
           requests:

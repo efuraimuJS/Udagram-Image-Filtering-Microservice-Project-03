@@ -63,13 +63,10 @@ deploy_all:
 
 pods:
 	kubectl get pods
-
 deploys:
 	kubectl get deployments
-secr:
-	kubectl get secrets
-
-
+svc:
+	kubectl get services
 
 compose_down:
 	sudo aa-remove-unknown
