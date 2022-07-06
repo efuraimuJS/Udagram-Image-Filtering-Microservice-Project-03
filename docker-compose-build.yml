@@ -1,21 +1,21 @@
 version: "3"
 services:
   
-  backend_user:
+  backenduser:
     build:
       context: ./api-users-component
-    image: efuraimujs/api-users-component:v1
-  backend_feed:
+    image: efuraimujs/api-users-component:v2
+  backendfeed:
     build:
       context: ./api-feeds-component
-    image: efuraimujs/api-feeds-component:v1
+    image: efuraimujs/api-feeds-component:v2
 
   reverseproxy:
     build:
       context: ./api-gateway-component
-    image: efuraimujs/api-gateway-component:v1
+    image: efuraimujs/api-gateway-component:v2
     
   frontend:
     build:
       context: ./frontend-component
-    image: efuraimujs/frontend-component:v1
+    image: efuraimujs/frontend-component:v2

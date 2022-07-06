@@ -82,4 +82,13 @@ spec:
               secretKeyRef:
                 name: env-secret
                 key: POSTGRESS_USERNAME      
+        volumeMounts:
+          - name: aws-secret
+            mountPath: "/root/.aws/"
+            readOnly: true
+      volumes:
+      - name: aws-secret
+        secret:
+          secretName: aws-secret
+      restartPolicy: Always   
 status: {}

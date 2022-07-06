@@ -1,7 +1,7 @@
 version: "3"
 services:
-  backend_user:
-    image: efuraimujs/api-users-component:v1
+  backenduser:
+    image: efuraimujs/api-users-component:v2
     environment:
       POSTGRES_USERNAME: $POSTGRES_USERNAME
       POSTGRES_PASSWORD: $POSTGRES_PASSWORD 
@@ -15,8 +15,8 @@ services:
     # networks:
     #   - example-net
 
-  backend_feed:
-    image: efuraimujs/api-feeds-component:v1
+  backendfeed:
+    image: efuraimujs/api-feeds-component:v2
     volumes:
       - $HOME/.aws:/root/.aws
     environment:
@@ -33,18 +33,18 @@ services:
     #   - example-net
 
   reverseproxy:
-    image: api-gateway-component:v1
+    image: efuraimujs/api-gateway-component:v2
     ports:
       - 8080:8080
     restart: always
     depends_on:
-      - backend_user
-      - backend_feed
+      - backenduser
+      - backendfeed
     # networks:
     #   - example-net
           
   frontend:
-    image: frontend-component:v1
+    image: efuraimujs/frontend-component:v2
     ports:
       - "8100:80"
     # networks:
