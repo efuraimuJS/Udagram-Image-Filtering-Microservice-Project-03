@@ -28,26 +28,26 @@ spec:
         ports:
         - containerPort: 8080
         env:
-        - name: POSTGRESS_HOST
+        - name: POSTGRES_HOST
           valueFrom:
             configMapKeyRef:
               name: env-config
-              key: POSTGRESS_HOST
-        - name: POSTGRESS_USERNAME
+              key: POSTGRES_HOST
+        - name: POSTGRES_USERNAME
           valueFrom:
             secretKeyRef:
               name: env-secret
-              key: POSTGRESS_USERNAME
-        - name: POSTGRESS_PASSWORD
+              key: POSTGRES_USERNAME
+        - name: POSTGRES_PASSWORD
           valueFrom:
             secretKeyRef:
               name: env-secret
-              key: POSTGRESS_PASSWORD
-        - name: POSTGRESS_DB
+              key: POSTGRES_PASSWORD
+        - name: POSTGRES_DB
           valueFrom:
             configMapKeyRef:
               name: env-config
-              key: POSTGRESS_DB
+              key: POSTGRES_DB
         - name: JWT_SECRET
           valueFrom:
             configMapKeyRef:
@@ -72,7 +72,7 @@ spec:
         - name: aws-secret
           mountPath: "/root/.aws/"
           readOnly: true        
-      restartPolicy: Always
+      restartPolicy: Never
       volumes:
       - name: aws-secret
         secret:

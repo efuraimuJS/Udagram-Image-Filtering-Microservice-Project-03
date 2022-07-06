@@ -7,6 +7,6 @@ data:
   AWS_PROFILE: default
   AWS_REGION: us-east-1
   JWT_SECRET: testing
-  POSTGRESS_DB: postgres
-  POSTGRESS_HOST: project3-db-1656284691.cocqdrux33zf.us-east-1.rds.amazonaws.com
+  POSTGRES_DB: postgres
+  POSTGRES_HOST: project3-db-1656284691.cocqdrux33zf.us-east-1.rds.amazonaws.com
   URL: http://localhost:8100
