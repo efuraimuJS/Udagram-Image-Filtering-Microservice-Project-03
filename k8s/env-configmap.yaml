@@ -1,5 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
+metadata:
+  name: env-config
 data:
   AWS_BUCKET: project3-bucket-1656284691
   AWS_PROFILE: default
@@ -7,6 +9,4 @@ data:
   JWT_SECRET: testing
   POSTGRESS_DB: postgres
   POSTGRESS_HOST: project3-db-1656284691.cocqdrux33zf.us-east-1.rds.amazonaws.com
-  URL: http://localhost:8100  
-metadata:
-  name: env-config
+  URL: http://localhost:8100

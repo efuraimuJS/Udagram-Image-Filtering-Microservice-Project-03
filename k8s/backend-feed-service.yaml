@@ -1,15 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  labels:
-    service: backendfeed
-  name: backend-feed
+  name: backendfeed
 spec:
   ports:
-  - name: "8080"
-    port: 8080
+  - port: 8080
     protocol: TCP
     targetPort: 8080
   selector:
-    service: backendfeed
+    app: backendfeed
   type: ClusterIP

@@ -1,94 +1,79 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    kompose.cmd: kompose -f docker-compose.yml -f docker-compose-build.yml convert
-    kompose.version: 1.26.1 (a9d05d509)
-  creationTimestamp: null
-  labels:
-    io.kompose.service: backenduser
   name: backenduser
+  labels:
+    app: backenduser
 spec:
   replicas: 1
   selector:
     matchLabels:
-      io.kompose.service: backenduser
-  strategy: {}
+      app: backenduser
   template:
     metadata:
-      annotations:
-        kompose.cmd: kompose -f docker-compose.yml -f docker-compose-build.yml convert
-        kompose.version: 1.26.1 (a9d05d509)
-      creationTimestamp: null
       labels:
-        io.kompose.service: backenduser
+        app: backenduser
     spec:
       containers:
-      - image: efuraimujs/api-users-component:v2
-        name: backenduser
+      - name: backenduser
+        image: efuraimujs/api-users-component:v2
+        imagePullPolicy: "Always"
         resources:
-            resources:
-            requests:
-              memory: "64Mi"
-              cpu: "250m"
-            limits:
-              memory: "1024Mi"
-              cpu: "500m"      
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "1024Mi"
+            cpu: "500m"    
         ports:
-          - containerPort: 8080            
+        - containerPort: 8080
         env:
-          - name: URL
-            valueFrom:
-              configMapKeyRef:
-                name: env-config
-                key: URL
-          - name: AWS_BUCKET
-            valueFrom:
-              configMapKeyRef:
-                name: env-config
-                key: AWS_BUCKET
-          - name: AWS_PROFILE
-            valueFrom:
-              configMapKeyRef:
-                name: env-config
-                key: AWS_PROFILE
-          - name: AWS_REGION
-            valueFrom:
-              configMapKeyRef:
-                name: env-config
-                key: AWS_REGION
-          - name: JWT_SECRET
-            valueFrom:
-              configMapKeyRef:
-                name: env-config
-                key: JWT_SECRET
-          - name: POSTGRESS_DB
-            valueFrom:
-              configMapKeyRef:
-                name: env-config
-                key: POSTGRESS_DB
-          - name: POSTGRESS_HOST
-            valueFrom:
-              configMapKeyRef:
-                name: env-config
-                key: POSTGRESS_HOST
-          - name: POSTGRESS_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: env-secret
-                key: POSTGRESS_PASSWORD
-          - name: POSTGRESS_USERNAME
-            valueFrom:
-              secretKeyRef:
-                name: env-secret
-                key: POSTGRESS_USERNAME      
+        - name: POSTGRESS_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: env-config
+              key: POSTGRESS_HOST
+        - name: POSTGRESS_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: env-secret
+              key: POSTGRESS_USERNAME
+        - name: POSTGRESS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: env-secret
+              key: POSTGRESS_PASSWORD
+        - name: POSTGRESS_DB
+          valueFrom:
+            configMapKeyRef:
+              name: env-config
+              key: POSTGRESS_DB
+        - name: JWT_SECRET
+          valueFrom:
+            configMapKeyRef:
+              name: env-config
+              key: JWT_SECRET               
+        - name: AWS_BUCKET
+          valueFrom:
+            configMapKeyRef:
+              name: env-config
+              key: AWS_BUCKET
+        - name: AWS_REGION
+          valueFrom:
+            configMapKeyRef:
+              name: env-config
+              key: AWS_REGION    
+        - name: AWS_PROFILE
+          valueFrom:
+            configMapKeyRef:
+              name: env-config
+              key: AWS_PROFILE  
         volumeMounts:
-          - name: aws-secret
-            mountPath: "/root/.aws/"
-            readOnly: true
+        - name: aws-secret
+          mountPath: "/root/.aws/"
+          readOnly: true        
+      restartPolicy: Always
       volumes:
       - name: aws-secret
         secret:
           secretName: aws-secret
-      restartPolicy: Always   
-status: {}

@@ -50,24 +50,39 @@ describe_stacks:
 
 deploy_all:
 	kubectl apply -f aws-secret.yaml \
-	-f env-configmap.yaml \
 	-f env-secret.yaml \
+	-f env-configmap.yaml \
 	-f backend-feed-deployment.yaml \
 	-f backend-feed-service.yaml \
 	-f backend-user-deployment.yaml \
 	-f backend-user-service.yaml \
 	-f reverseproxy-deployment.yaml \
 	-f reverseproxy-service.yaml \
-	-f frontend-deployment.yaml 
+	-f frontend-deployment.yaml \
 	-f frontend-service.yaml
 
 pods:
 	kubectl get pods
 
+deploys:
+	kubectl get deployments
+
+compose_down:
+	sudo aa-remove-unknown
+
+	docker stop $(docker ps -a -q)
+	docker rm $(docker ps -a -q)
+
+	sudo apparmor_parser -r /etc/apparmor.d/*snap-confine*
+	sudo apparmor_parser -r /var/lib/snapd/apparmor/profiles/snap-confine*
+
+	sudo apparmor_parser -r /var/lib/snapd/apparmor/profiles/*
+	sudo systemctl enable --now apparmor.service
+	
 destroy_all:
 	kubectl delete -f aws-secret.yaml \
-	-f env-configmap.yaml \
 	-f env-secret.yaml \
+	-f env-configmap.yaml \
 	-f backend-feed-deployment.yaml \
 	-f backend-feed-service.yaml \
 	-f backend-user-deployment.yaml \

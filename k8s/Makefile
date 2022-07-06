@@ -50,8 +50,8 @@ describe_stacks:
 
 deploy_all:
 	kubectl apply -f aws-secret.yaml \
-	-f env-configmap.yaml \
 	-f env-secret.yaml \
+	-f env-configmap.yaml \
 	-f backend-feed-deployment.yaml \
 	-f backend-feed-service.yaml \
 	-f backend-user-deployment.yaml \
@@ -63,6 +63,13 @@ deploy_all:
 
 pods:
 	kubectl get pods
+
+deploys:
+	kubectl get deployments
+secr:
+	kubectl get secrets
+
+
 
 compose_down:
 	sudo aa-remove-unknown
@@ -78,8 +85,8 @@ compose_down:
 	
 destroy_all:
 	kubectl delete -f aws-secret.yaml \
-	-f env-configmap.yaml \
 	-f env-secret.yaml \
+	-f env-configmap.yaml \
 	-f backend-feed-deployment.yaml \
 	-f backend-feed-service.yaml \
 	-f backend-user-deployment.yaml \

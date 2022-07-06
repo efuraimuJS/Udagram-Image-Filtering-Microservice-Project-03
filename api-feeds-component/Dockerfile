@@ -9,7 +9,7 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # Install dependencies in Docker
-RUN npm ci
+RUN npm install --force --loglevel verbose
 
 # Copy app from local env into the created Docker Image
 COPY . .
