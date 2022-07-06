@@ -72,7 +72,7 @@ spec:
         - name: aws-secret
           mountPath: "/root/.aws/"
           readOnly: true        
-      restartPolicy: Never
+      restartPolicy: Always
       volumes:
       - name: aws-secret
         secret:
